@@ -121,15 +121,13 @@ section
         .publi
             position: relative
             border-radius: 20px
-            height: 300px
             width: 100%
 
         .conFoto
-            height: fit-content
             display: flex
             .imagen
                 flex-basis: 1
-                max-height: 500px
+                height: 100%
                 margin-left: 10px 
                 width: fit-content
                 max-width: fit-content
@@ -140,9 +138,11 @@ section
                 border-radius: 20px
                 margin-right: 5px
                 position: relative
+                flex-grow: 1
+                background: red
                 img
                     display: block
-                    max-height: 100%
+                    max-height: 500px
                     max-width: 500px
                     object-fit: contain
                     height: fit-content
@@ -154,6 +154,8 @@ section
                 display: flex
                 flex-direction: column
                 justify-content: space-between
+                background: blue
+                width: 100%
                 .perfil
                     height: 4em
                     display: flex
@@ -177,41 +179,49 @@ section
                         font-size: .8em
                         color: grey
 
+               
+
                 .comentarios
                     margin-top: 10px
-                    font-size: 15px 
-                    display: flex
-                    flex-direction: column
-                    justify-content: flex-end
-                    overflow-y: scroll
-                    position: absolute
-                    height: 80%
+                    font-size: 15px
+                    display: block
+                    overflow-y: auto
+                    background: pink
+                    height: 100%
+                    
 
-                    .comentario
-                        min-height: 60px
-                        padding: 10px
+
+                    .comentarios-wrapper
                         display: flex
-                        margin: 10px
-                        margin-top: 0
-                        background: $darker-sea-green-transparent
-                        border-radius: 15px
-                        
-                        box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.1)
-                        img
-                            display: block
-                            opacity: 1
-                            height: 40px
-                            aspect-ratio: 1
-                            border-radius: 100% 
-                            border: 1px solid black
-                            object-fit: cover
-                        .text
-                            margin-left: 10px
-                            .nombre
-                                font-weight: bold
-                                font-size: .8em
-                            .texto
-                                font-size: .9em
+                        flex-direction: column
+                        justify-content: flex-end
+                        height: fit-content
+                        background: green
+
+                        .comentario
+                            padding: 10px
+                            display: flex
+                            margin: 10px
+                            margin-top: 0
+                            background: $darker-sea-green-transparent
+                            border-radius: 15px
+                            box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.1)
+                            img
+                                display: block
+                                opacity: 1
+                                height: 40px
+                                aspect-ratio: 1
+                                border-radius: 100% 
+                                border: 1px solid black
+                                object-fit: cover
+                            .text
+                                margin-left: 10px
+                                .nombre
+                                    font-weight: bold
+                                    font-size: .8em
+                                .texto
+                                    font-size: .9em
+                                    height: 100%
                 .nuevoComentario
                     height: 40px
                     display: flex
