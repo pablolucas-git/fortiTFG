@@ -27,7 +27,7 @@ function registrar()
         echo "problemaUser";
     }
     else if($res){
-        echo 'loggeado';
+        echo 'registrado';
     }
     else{
         echo 'fallo';
