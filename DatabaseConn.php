@@ -2,29 +2,36 @@
 
 class DatabaseConn
 {
-    const servername = "localhost";
-    const username = "forti";
-    const password = "forti";
-    const dbname = "forti";
-
-    // Create connection
-    const conn = new mysqli(servername, username, password, dbname);
+    protected $conn;
 
 
+    function __construct()
+    {
+        $servername = "localhost";
+        $username = "forti";
+        $password = "forti";
+        $dbname = "forti";
+
+        // Create connection
+        $this->conn = new mysqli($servername, $username, $password, $dbname);
+    }
 
     function comprobarLogin($username, $password)
     {
 
         try {
-            $sql = "SELECT * FROM Usuario WHERE username=" . $username . " AND password= " . $password;
-            $result = self::conn->query($sql);
+            $sql = "SELECT * FROM Usuario u WHERE u.username='$username' AND u.password='$password'";
+            
+            $result = $this->conn->query($sql);
+            echo "\n" . $username . "\n" . $password . "\n";
+            echo $result->fetch_assoc();
         } catch (Exception $e) {
             echo $e;
         }
         if ($result->num_rows > 0) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     function comprobarRegistro($datos)
     {
@@ -33,14 +40,15 @@ class DatabaseConn
         $username = $datos["username"];
         $password = $datos["password"];
         $nombre = $datos["nombre"];
+        echo 'aqui';
 
         $problemaMail = false;
         $problemaUser = false;
 
 
         try {
-            $sql = "SELECT * FROM Usuario WHERE username=" . $username;
-            $result = self::conn->query($sql);
+            $sql = "SELECT * FROM Usuario WHERE username='$username'";
+            $result = $this->conn->query($sql);
         } catch (Exception $e) {
             echo $e;
         }
@@ -49,8 +57,8 @@ class DatabaseConn
         }
 
         try {
-            $sql = "SELECT * FROM Usuario WHERE email=" . $email;
-            $result = self::conn->query($sql);
+            $sql = "SELECT * FROM Usuario WHERE email='$email'";
+            $result = $this->conn->query($sql);
         } catch (Exception $e) {
             echo $e;
         }
@@ -75,7 +83,7 @@ class DatabaseConn
         $sql = "INSERT INTO Usuario VALUES($id, '$nombre', '$username', '$password', '$email')";
 
 
-        if (self::conn->query($sql) === TRUE) {
+        if ($this->conn->query($sql) === TRUE) {
             echo "New record created successfully";
         } else {
             return false;
@@ -89,10 +97,10 @@ class DatabaseConn
         $existeID = false;
         do {
             $existeID = false;
-            $id = random_int(0, PHP_INT_MAX);
+            $id = random_int(0, 2147483646);
             try {
                 $sql = "SELECT * FROM Usuario WHERE id=" . $id;
-                $result = self::conn->query($sql);
+                $result = $this->conn->query($sql);
             } catch (Exception $e) {
                 echo $e;
             }
